@@ -106,7 +106,7 @@ class Seeker:
         
 # Parser declartions and initializations
 
-parser =argparse.ArgumentParser(description="Seeker 1.1",usage="seeker.py <IPv4 address> [Scan Type]")
+parser =argparse.ArgumentParser(description="Seeker 1.1",usage="seeker.py <IPv4 address> [Scan type flags]")
 parser._print_message(RED+out+RESET)
 
 parser.add_argument("host",help="IPv4 of the host to scan.\n")
