@@ -110,11 +110,11 @@ parser =argparse.ArgumentParser(description="Seeker 1.1",usage="seeker.py <IPv4 
 parser._print_message(RED+out+RESET)
 
 parser.add_argument("host",help="IPv4 of the host to scan.\n")
-parser.add_argument("--ports","-p","-P",help="Scan a specific port,\n use \"-\" to specify a port range.")
-parser.add_argument("--quick","-q","-Q",action="store_true",help="Quick scan the top 100 ports.")
-parser.add_argument("--all","-a","-A",action="store_true",help="Scan all ports (0-65535).")
-parser.add_argument("--service","-sV",action="store_true",help="Display port services.")
-parser.add_argument("--output","-o","-O",type=str,help="Store the output in a text file at the path .")
+parser.add_argument("-p","--ports",help="Scan a specific port,\n use \"-\" to specify a port range.")
+parser.add_argument("-q","--quick",action="store_true",help="Quick scan the top 100 ports.")
+parser.add_argument("-a","--all",action="store_true",help="Scan all ports (0-65535).")
+parser.add_argument("-sV","--service",action="store_true",help="Display port services.")
+parser.add_argument("-o","--output",type=str,help="Store the output in a text file at the path .")
 args=parser.parse_args()
 
 # Argument processing 
