@@ -1,2 +1,0 @@
-# Seeker
-A port scanner
