@@ -67,6 +67,7 @@ Scanning the IPv4 of google.com
   python seeker.py 142.250.183.228 -p 0-450
 ```
 Here the scanner tries to ping the target through a port range of "0-450".
+Without the "-p" flag the scanner script scans the most commonly used 1000 ports.
 
 ```bash                                       
  _____ _____ _____ _____ _____ _____ 
