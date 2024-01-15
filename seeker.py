@@ -32,12 +32,14 @@ pretty.field_names=["Port no.","Protocol","State","Service"]
 
 class Seeker:
   
-    def __init__(self,host,ports,service_bool,out_bool) -> None:
+    def __init__(self,host,ports,service_bool,out_bool,time_out=1.0) -> None:
         self.host=host
         self.ports=ports
         self.service_bool=service_bool
         self.out_bool=out_bool
-        self.num_thread=200
+        self.num_thread=200 
+        self.time_out = time_out
+
 
     def start_scan(self):
         while True:
@@ -49,7 +51,7 @@ class Seeker:
     def port_scan(self,port):
         
         s = socket.socket(socket.AF_INET)
-        socket.setdefaulttimeout(1)
+        s.settimeout(self.time_out)
         result=s.connect_ex((host, port))
         if result==0:
             if self.service_bool:
@@ -108,13 +110,13 @@ class Seeker:
 
 parser =argparse.ArgumentParser(description="Seeker 1.1",usage="seeker.py <IPv4 address> [Scan type flags]")
 parser._print_message(RED+out+RESET)
-
 parser.add_argument("host",help="IPv4 of the host to scan.\n")
 parser.add_argument("-p","--ports",help="Scan a specific port,\n use \"-\" to specify a port range.")
 parser.add_argument("-q","--quick",action="store_true",help="Quick scan the top 100 ports.")
 parser.add_argument("-a","--all",action="store_true",help="Scan all ports (0-65535).")
 parser.add_argument("-sV","--service",action="store_true",help="Display port services.")
 parser.add_argument("-o","--output",type=str,help="Store the output in a text file at the path .")
+parser.add_argument("-st","--set_timeout",type=float,help="Set timeout for response.")
 args=parser.parse_args()
 
 # Argument processing 
@@ -128,6 +130,9 @@ if args.service:
     service_bool=True
     j_obj=open("port_service.json")
     data=json.load(j_obj)
+time_out = 1.0
+if args.set_timeout:
+    time_out = args.set_timeout
 
 if args.output:
     if os.path.exists(args.output):
@@ -161,5 +166,5 @@ else:
 
 # Seeker class object
 
-obj=Seeker(host,final_port,service_bool,out_bool)
+obj=Seeker(host,final_port,service_bool,out_bool,time_out=time_out)
 obj.threader()
