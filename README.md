@@ -59,6 +59,8 @@ options:
   -sV, --service        Display port services.
   -o OUTPUT, --output OUTPUT
                         Store the output in a text file at the path .
+ -st SET_TIMEOUT, --set_timeout SET_TIMEOUT
+                        Set timeout for response.
 ```
 ## Example
 Scanning the IPv4 of google.com
