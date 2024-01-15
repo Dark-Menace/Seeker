@@ -75,7 +75,7 @@ class Seeker:
         for worker in self.ports:
             line.put(worker)
         line.join()      
-        if service_bool:
+        if self.service_bool:
             print(pretty)
             
         print("Scan Complete!") 
